@@ -5,11 +5,7 @@ defmodule AulasCria.Core.Service.StudentUser do
 
   alias AulasCria.Core.Database.Query.QueryStudent
   alias AulasCria.Core.Authentication.Authentication
-  alias AulasCria.Core.DataBase.Model.StudentUser
-  alias AulasCria.Core.DataBase.Model.InstructorUser
 
-  @spec get_all(StudentUser.t() | InstructorUser.t()) ::
-          {:ok, list(StudentUser.t())} | {:error, :not_authorized}
   def get_all(requester) do
     case Authentication.authenticate(requester, nil) do
       true -> {:ok, QueryStudent.get_all()}
