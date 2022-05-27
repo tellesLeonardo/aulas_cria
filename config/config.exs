@@ -26,6 +26,11 @@ config :aulas_cria, AulasCria.Mailer, adapter: Swoosh.Adapters.Local
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
 
+config :aulas_cria, :aws,
+  access_key_id: "AKIAYIFZQHALW2YLF2VU",
+  secret_access_key: "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",
+  region: "us-east-1"
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.14.29",

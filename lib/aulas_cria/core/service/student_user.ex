@@ -41,7 +41,7 @@ defmodule AulasCria.Core.Service.StudentUser do
     end
   end
 
-  def create(requester, _params_student_user) do
+  def create(requester, params_student_user) do
     case Authentication.authenticate(requester, nil) do
       true -> {:ok, QueryStudent.create(params_student_user)}
       false -> {:error, :not_authorized}

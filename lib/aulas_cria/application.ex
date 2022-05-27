@@ -13,9 +13,9 @@ defmodule AulasCria.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: AulasCria.PubSub},
       # Start the Endpoint (http/https)
-      AulasCriaWeb.Endpoint
+      AulasCriaWeb.Endpoint,
       # Start a worker by calling: AulasCria.Worker.start_link(arg)
-      # {AulasCria.Worker, arg}
+      {AulasCria.Core.SdkAws, %{}}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
