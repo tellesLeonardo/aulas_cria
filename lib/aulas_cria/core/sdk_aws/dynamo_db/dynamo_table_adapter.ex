@@ -1,27 +1,20 @@
 defmodule AulasCria.Core.SdkAws.DybanoTableAdpter do
   @moduledoc false
 
-  import AWS.DynamoDB
-
   # Tables
+  import ExAws.Dynamo
+  require Logger
 
-  # def get() do
-  #   query()
-  # end
+  def all() do
+    list_tables()
+    |> ExAws.request()
+    |> return()
+  end
 
-  # def delete() do
-  #   delete_table()
-  # end
+  defp return({:ok, data}), do: data
 
-  # def all() do
-  #   list_tables()
-  # end
-
-  # def update() do
-  #   update_table()
-  # end
-
-  # def create() do
-  #   create_table
-  # end
+  defp return({:error, error}) do
+    Logger.error("#{__MODULE__} erro: #{inspect(error)} ")
+    {:error, error}
+  end
 end

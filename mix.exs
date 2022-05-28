@@ -46,8 +46,8 @@ defmodule AulasCria.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:aws, "~> 0.11.0"},
-      {:hackney, "~> 1.18"}
+      {:hackney, "~> 1.18"},
+      {:ex_aws_dynamo, "~> 4.0"}
     ]
   end
 
