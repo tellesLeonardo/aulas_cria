@@ -31,6 +31,11 @@ config :ex_aws,
   secret_access_key: "Zxuv7y7K5/V5kLiduLaPEMCeRH66SdpAEI6GesPk",
   region: "us-east-1"
 
+config :ex_aws, :s3,
+  scheme: "http://",
+  host: "localhost",
+  port: 4567
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.14.29",

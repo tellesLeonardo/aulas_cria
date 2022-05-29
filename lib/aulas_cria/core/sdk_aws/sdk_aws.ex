@@ -27,41 +27,71 @@ defmodule AulasCria.Core.SdkAws do
   end
 
   @impl true
-  def handle_call({event, module}, _from, state) do
-    module |> IO.inspect()
+  def handle_call({:get, table, search}, _from, state) do
+    {:reply, valid_table(state.aws.tables, table, fn -> adapter_dynamo().get(table, search) end),
+     state}
+  end
 
-    cond do
-      module == :dynamo_db ->
-        redirect(adapter_dynamo(), event, state)
+  @impl true
+  def handle_call({:delete, table, search}, _from, state) do
+    {:reply,
+     valid_table(state.aws.tables, table, fn -> adapter_dynamo().delete(table, search) end),
+     state}
+  end
 
-      module == :ec2 ->
-        redirect(adapter_s3(), event, state)
+  @impl true
+  def handle_call({:all, table}, _from, state) do
+    {:reply, valid_table(state.aws.tables, table, fn -> adapter_dynamo().all(table) end), state}
+  end
 
-      true ->
-        "no correspondent"
-    end
+  @impl true
+  def handle_call({:update, table, primary_key, item}, _from, state) do
+    {:reply,
+     valid_table(state.aws.tables, table, fn ->
+       adapter_dynamo().update(table, primary_key, item)
+     end), state}
+  end
 
-    {:reply, nil, state}
+  @impl true
+  def handle_call({:create, table, item}, _from, state) do
+    {:reply, valid_table(state.aws.tables, table, fn -> adapter_dynamo().create(table, item) end),
+     state}
+  end
+
+  @impl true
+  def handle_call(:tables, _from, state) do
+    state =
+      Map.merge(state, %{
+        aws: %{
+          tables: adapter_dynamo_struct().all()
+        }
+      })
+
+    {:reply, state.aws.tables, state}
   end
 
   @impl true
   def handle_cast(_event, state) do
+    IO.inspect(state)
     {:noreply, state}
   end
 
-  def call(event, opts \\ []) do
-    timeout = Keyword.get(opts, :timeout) || @timeout
-
+  def call(event, timeout \\ @timeout) do
     GenServer.call(:persistent_process, event, timeout)
   end
 
-  defp redirect(adapter, :get, state), do: adapter.get(state.aws.client)
-  defp redirect(adapter, :delete, state), do: adapter.delete(state.aws.client)
-  defp redirect(adapter, :all, state), do: adapter.all(state.aws.client)
-  defp redirect(adapter, :update, state), do: adapter.update(state.aws.client)
-  defp redirect(adapter, :create, state), do: adapter.create(state.aws.client)
+  def cast(event) do
+    GenServer.cast(:persistent_process, event)
+  end
 
-  def adapter_dynamo(), do: AulasCria.Core.SdkAws.DynamoItemAdpter
-  def adapter_dynamo_struct(), do: AulasCria.Core.SdkAws.DybanoTableAdpter
-  def adapter_s3(), do: AulasCria.Core.SdkAws.S3
+  defp adapter_dynamo(), do: AulasCria.Core.SdkAws.DynamoItemAdpter
+  defp adapter_dynamo_struct(), do: AulasCria.Core.SdkAws.DybanoTableAdpter
+  # defp adapter_s3(), do: AulasCria.Core.SdkAws.S3
+
+  defp valid_table(%{"TableNames" => tables_valid}, table, function) do
+    case table in tables_valid do
+      true -> function.()
+      false -> :error_table_invalid
+    end
+  end
 end

@@ -6,11 +6,14 @@ defmodule AulasCria.Core.DataBase.Model.StudentUser do
   defstruct name: nil,
             id: nil,
             password: nil,
-            birth_date: nil,
+            birthday: nil,
             email: nil,
-            schooling: nil,
-            educational_institution: nil,
+            school: nil,
             about_me: nil,
             picture: nil,
-            background_picture: nil
+            background: nil,
+            colege: false,
+            high_school: false,
+            instructors: [],
+            tasks: []
 end

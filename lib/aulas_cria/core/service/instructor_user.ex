@@ -7,43 +7,43 @@ defmodule AulasCria.Core.Service.InstructorUser do
   alias AulasCria.Core.Database.Query.QueryInstructor
 
   def get_all(requester) do
-    case Authentication.authenticate(requester, nil) do
+    case Authentication.authenticate(requester) do
       true -> {:ok, QueryInstructor.get_all()}
       false -> {:error, :not_authorized}
     end
   end
 
-  def get_by(requester, opts_search) do
-    case Authentication.authenticate(requester, nil) do
-      true -> {:ok, QueryInstructor.get_by(opts_search)}
+  def get_by_id(requester, instructor_id) do
+    case Authentication.authenticate(requester) do
+      true -> {:ok, QueryInstructor.get_by_id(instructor_id)}
       false -> {:error, :not_authorized}
     end
   end
 
   def get_per_instructor(requester, instructor_id) do
-    case Authentication.authenticate(requester, nil) do
+    case Authentication.authenticate(requester) do
       true -> {:ok, QueryInstructor.get_per_instructor(instructor_id)}
       false -> {:error, :not_authorized}
     end
   end
 
-  def update(requester, student_user, update_student_user) do
-    case Authentication.authenticate(requester, nil) do
-      true -> {:ok, QueryInstructor.update(student_user, update_student_user)}
+  def update(requester, instructor_id, update_instructor_user) do
+    case Authentication.authenticate(requester) do
+      true -> {:ok, QueryInstructor.update(instructor_id, update_instructor_user)}
       false -> {:error, :not_authorized}
     end
   end
 
-  def delete(requester, student_user) do
-    case Authentication.authenticate(requester, nil) do
-      true -> {:ok, QueryInstructor.delete(student_user)}
+  def delete(requester, instructor_user) do
+    case Authentication.authenticate(requester) do
+      true -> {:ok, QueryInstructor.delete(instructor_user.id)}
       false -> {:error, :not_authorized}
     end
   end
 
-  def create(requester, params_student_user) do
-    case Authentication.authenticate(requester, nil) do
-      true -> {:ok, QueryInstructor.create(params_student_user)}
+  def create(requester, params_instructor_user) do
+    case Authentication.authenticate(requester) do
+      true -> {:ok, QueryInstructor.create(params_instructor_user)}
       false -> {:error, :not_authorized}
     end
   end

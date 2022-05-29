@@ -22,15 +22,15 @@ defmodule AulasCria.Core.SdkAws.DynamoItemAdpter do
     |> return()
   end
 
-  def update(table, item) do
-    case get(table, id: item.id) do
-      {:ok, %{}} ->
-        {:error, :item_not_exist}
-
-      {:ok, %{"Item" => _}} ->
+  def update(table, primary_key, item) do
+    case get(table, id: primary_key) do
+      %{"Item" => _} ->
         put_item(table, item)
         |> ExAws.request()
         |> return()
+
+      %{} ->
+        {:error, :item_not_exist}
     end
   end
 
@@ -38,6 +38,11 @@ defmodule AulasCria.Core.SdkAws.DynamoItemAdpter do
     put_item(table, item)
     |> ExAws.request()
     |> return()
+  end
+
+  def execute_query(table, query) when is_list(query) do
+    scan(table, query)
+    |> ExAws.request()
   end
 
   defp return({:ok, data}), do: data

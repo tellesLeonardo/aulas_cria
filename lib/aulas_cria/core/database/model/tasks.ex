@@ -5,10 +5,13 @@ defmodule AulasCria.Core.DataBase.Model.Tasks do
 
   defstruct title: nil,
             description: nil,
-            dificuldade: nil,
             instructor: nil,
             category: nil,
             id: nil,
             created_at: nil,
-            tags: []
+            tags: [],
+            amount_of_completion: 0,
+            difficulty: 0,
+            number_of_students: 0,
+            tasks_videos: []
 end

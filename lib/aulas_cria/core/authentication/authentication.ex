@@ -7,16 +7,16 @@ defmodule AulasCria.Core.Authentication.Authentication do
 
   require Logger
 
-  def authenticate(%InstructorUser{} = instruct_user, _authenticated) do
+  def authenticate(%InstructorUser{} = instruct_user) do
     Logger.warn("Tentou fazer a autenticação #{inspect(instruct_user)}")
 
     true
   end
 
-  def authenticate(%StudentUser{} = student_user, _authenticated) do
+  def authenticate(%StudentUser{} = student_user) do
     Logger.warn("Tentou fazer a autenticação #{inspect(student_user)}")
     true
   end
 
-  def authenticate(_, _), do: false
+  def authenticate(_), do: false
 end

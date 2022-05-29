@@ -7,42 +7,42 @@ defmodule AulasCria.Core.Service.StudentUser do
   alias AulasCria.Core.Authentication.Authentication
 
   def get_all(requester) do
-    case Authentication.authenticate(requester, nil) do
+    case Authentication.authenticate(requester) do
       true -> {:ok, QueryStudent.get_all()}
       false -> {:error, :not_authorized}
     end
   end
 
-  def get_by(requester, opts_search) do
-    case Authentication.authenticate(requester, nil) do
-      true -> {:ok, QueryStudent.get_by(opts_search)}
+  def get_by_id(requester, instructor_id) do
+    case Authentication.authenticate(requester) do
+      true -> {:ok, QueryStudent.get_by_id(instructor_id)}
       false -> {:error, :not_authorized}
     end
   end
 
   def get_per_instructor(requester, instructor_id) do
-    case Authentication.authenticate(requester, nil) do
+    case Authentication.authenticate(requester) do
       true -> {:ok, QueryStudent.get_per_instructor(instructor_id)}
       false -> {:error, :not_authorized}
     end
   end
 
-  def update(requester, student_user, update_student_user) do
-    case Authentication.authenticate(requester, nil) do
-      true -> {:ok, QueryStudent.update(student_user, update_student_user)}
+  def update(requester, instructor_id, update_student_user) do
+    case Authentication.authenticate(requester) do
+      true -> {:ok, QueryStudent.update(instructor_id, update_student_user)}
       false -> {:error, :not_authorized}
     end
   end
 
   def delete(requester, student_user) do
-    case Authentication.authenticate(requester, nil) do
-      true -> {:ok, QueryStudent.delete(student_user)}
+    case Authentication.authenticate(requester) do
+      true -> {:ok, QueryStudent.delete(student_user.id)}
       false -> {:error, :not_authorized}
     end
   end
 
   def create(requester, params_student_user) do
-    case Authentication.authenticate(requester, nil) do
+    case Authentication.authenticate(requester) do
       true -> {:ok, QueryStudent.create(params_student_user)}
       false -> {:error, :not_authorized}
     end
