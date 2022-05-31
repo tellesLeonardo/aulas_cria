@@ -4,19 +4,11 @@ defmodule AulasCria.Core.Authentication.Authentication do
   """
 
   alias AulasCria.Core.DataBase.Model.{InstructorUser, StudentUser}
+  alias AulasCria.Core.Database.Query.{QueryInstructor, QueryStudent}
 
   require Logger
 
-  def authenticate(%InstructorUser{} = instruct_user) do
-    Logger.warn("Tentou fazer a autenticação #{inspect(instruct_user)}")
-
-    true
-  end
-
-  def authenticate(%StudentUser{} = student_user) do
-    Logger.warn("Tentou fazer a autenticação #{inspect(student_user)}")
-    true
-  end
-
+  def authenticate(%InstructorUser{} = instruct_user), do: !!QueryStudent.get_by_id(instruct_user.id)
+  def authenticate(%StudentUser{} = student_user), do: !!QueryStudent.get_by_id(student_user.id)
   def authenticate(_), do: false
 end
