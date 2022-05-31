@@ -54,7 +54,7 @@ defmodule AulasCria.Core.Database.Query.QueryInstructor do
         email: item["email"],
         id: item["id"],
         name: item["name"],
-        password: item["senha"],
+        password: item["password"],
         picture: item["foto"],
         schooling: item["schooling"],
         students: item["students"],
@@ -65,5 +65,7 @@ defmodule AulasCria.Core.Database.Query.QueryInstructor do
   end
 
   defp formater_instructor_user(%{"Item" => items}),
-    do: formater_instructor_user(%{"Items" => items})
+    do: formater_instructor_user(%{"Items" => items}) |> List.first()
+
+  defp formater_instructor_user(_), do: nil
 end

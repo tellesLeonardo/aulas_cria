@@ -35,6 +35,7 @@ defmodule AulasCria.MixProject do
     [
       {:phoenix, "~> 1.6.9"},
       {:phoenix_html, "~> 3.0"},
+      {:phoenix_ecto, "~> 4.3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_view, "~> 0.17.5"},
       {:floki, ">= 0.30.0", only: :test},
@@ -49,7 +50,12 @@ defmodule AulasCria.MixProject do
       {:hackney, "~> 1.18"},
       {:ex_aws_dynamo, "~> 4.0"},
       {:ex_aws, "~> 2.0"},
-      {:ex_aws_s3, "~> 2.0"}
+      {:ex_aws_s3, "~> 2.0"},
+      {:comeonin, "~> 5.3"},
+      {:bcrypt_elixir, "~> 2.0"},
+      {:ecto, "~> 3.8"},
+      {:pow, "~> 1.0.24"},
+      {:timex, "~> 3.7"}
     ]
   end
 

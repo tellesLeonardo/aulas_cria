@@ -61,5 +61,7 @@ defmodule AulasCria.Core.Database.Query.QueryTasks do
   end
 
   defp formater_instructor_user(%{"Item" => items}),
-    do: formater_instructor_user(%{"Items" => items})
+    do: formater_instructor_user(%{"Items" => items}) |> List.first()
+
+  defp formater_instructor_user(_), do: nil
 end

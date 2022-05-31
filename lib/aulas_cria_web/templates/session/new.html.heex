@@ -1,0 +1,12 @@
+<h1>Sign in</h1>
+
+<p> Login <%= normalize(@type_user) %> </p>
+    
+<%= form_for @conn, Routes.session_path(@conn, :new), [as: :session], fn f -> %>
+  <%= text_input f, :username, placeholder: "username" %>
+  <%= password_input f, :password, placeholder: "password" %>
+  <%= hidden_input f, :type_user, value: @type_user %>
+  <%= submit "Sign in" %>
+<% end %>
+
+<%= link "Login #{inverse_type(@type_user)}", to: Routes.session_path(@conn, :new, type_user: inverse_type(@type_user) ) %>

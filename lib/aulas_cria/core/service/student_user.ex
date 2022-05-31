@@ -47,4 +47,8 @@ defmodule AulasCria.Core.Service.StudentUser do
       false -> {:error, :not_authorized}
     end
   end
+
+  def create(params_student_user) do
+    QueryStudent.create(params_student_user)
+  end
 end

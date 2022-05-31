@@ -1,0 +1,17 @@
+<span>teste</span>
+
+<div>
+    <%= for task <- @tasks do %>
+        <div style="display: flex; flex-direction: column; border: 1px solid; width: 100px; padding: 10px 5px">
+            <span>  <%= task.description %>  </span>
+            <i> <%= task.difficulty %>  </i>
+
+            <i> <%= task.difficulty %>  </i>
+
+            <b> <%= task.id %></b>
+            <b> <%= task.title %></b>
+            
+        </div>
+        
+    <% end %> 
+</div>

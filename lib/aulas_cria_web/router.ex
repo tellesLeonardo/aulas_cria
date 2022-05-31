@@ -5,7 +5,7 @@ defmodule AulasCriaWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, {AulasCriaWeb.LayoutView, :root}
+
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -14,10 +14,12 @@ defmodule AulasCriaWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", AulasCriaWeb do
-    pipe_through :browser
+  pipeline :live_view do
+    plug(:put_root_layout, {AulasCriaWeb.LayoutView, :live})
+  end
 
-    get "/", PageController, :index
+  pipeline :authenticated do
+    plug AulasCriaWeb.AuthHandler
   end
 
   # Other scopes may use custom stacks.
@@ -35,10 +37,29 @@ defmodule AulasCriaWeb.Router do
 
   import Phoenix.LiveDashboard.Router
 
-  scope "/" do
-    pipe_through :browser
+  scope "/login", AulasCriaWeb do
+    pipe_through([:browser])
 
-    live_dashboard "/dashboard", metrics: AulasCriaWeb.Telemetry
+    get "/", SessionController, :index
+    get "/sign-in", SessionController, :new
+    post "/sign-in", SessionController, :create
+    get "/sign-up", SessionController, :new2
+    post "/sign-up", SessionController, :create2
+    get "/sign-out", SessionController, :delete
+  end
+
+  scope "/", AulasCriaWeb do
+    pipe_through([:browser, :authenticated])
+
+    resources "/", RegistrationController, only: [:index]
+
+    live_dashboard "/dashboard", metrics: Telemetry
+  end
+
+  scope "/aulas", AulasCriaWeb do
+    pipe_through([:browser, :live_view])
+
+    live "/", Live.Aulas.AulasLive
   end
 
   # Enables the Swoosh mailbox preview in development.

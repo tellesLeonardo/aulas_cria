@@ -47,4 +47,8 @@ defmodule AulasCria.Core.Service.InstructorUser do
       false -> {:error, :not_authorized}
     end
   end
+
+  def create(params_instructor_user) do
+    QueryInstructor.create(params_instructor_user)
+  end
 end
