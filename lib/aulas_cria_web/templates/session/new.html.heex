@@ -9,4 +9,8 @@
   <%= submit "Sign in" %>
 <% end %>
 
+<%= link "Back", to: Routes.session_path(@conn, :index) %>
+
+
 <%= link "Login #{inverse_type(@type_user)}", to: Routes.session_path(@conn, :new, type_user: inverse_type(@type_user) ) %>
+

@@ -1,13 +1,59 @@
-<h1>APP User</h1>
+<div class="h-screen  ">
+  <div class="h-full flex justify-center items-center	 flex-col"> 
+    <div style="max-height: 50rem;" class="bg-white w-2/8 h-4/6 drop-shadow-xl shadow rounded-3xl py-20 px-10 flex flex-col items-center justify-between"> 
+
+      <div class="text-center flex flex-col justify-between h-32">
+        <div>
+          <span class="font-bold text-4xl">Tote</span>
+          <%= link "#{inverse_type(@type_user)}", class: find_badge(@type_user), to: Routes.session_path(@conn, :index, type_user: inverse_type(@type_user) ) %>
+        </div>
+
+        <div>
+          <span class="text-5xl text-gray-600">Seja bem vindo</span>
+        </div>
+      </div> 
+
+      <div class="w-full"> 
+        <%= form_for @conn, Routes.session_path(@conn, :index), [as: :session], fn f -> %>
+          
+            <div class="mb-5">
+              <%= label(:username, "Nome de usuário", class: "text-lg")%>
+              <%= text_input f, :username, style: "border-radius: 1rem;", class: "block w-full py-2 border border-gray-500", placeholder: "Digite o nome do usuário" %>
+            </div>
+          
+            <div class="mb-10">
+              <%= password_input f, :password,style: "border-radius: 1rem;", class: "block w-full py-2 border  border-gray-500",  placeholder: "Digite a senha do usuário" %>
+              <%= hidden_input f, :type_user, value: @type_user %>
+            </div>
+            
+            <div>
+              <%= submit "Acessar", class: "py-2 bg-blue-500  border rounded-2xl	 text-white text-center w-full"%>
+            </div>
+          
+
+        <% end %>
+      </div>
+
+      <div>
+        <p class="text-center">Não tem uma conta? 
+          <%= link "Registre-se gratuitamente", class: "text-blue-500", to: Routes.session_path(@conn, :new2) %>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>  
+
+
+
 
 
 <%= if signed_in?(@conn) do %>
   <%= link "Sign out", to: Routes.session_path(@conn, :delete), method: :delete %>
 <% else %>
-  <%= link "Sign In", to: Routes.session_path(@conn, :new) %>
-  |
-  <%= link "Sign up", to: Routes.session_path(@conn, :new2) %>
-<% end %>
 
+  |
+  
+<% end %>
 
 

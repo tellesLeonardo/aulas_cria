@@ -6,17 +6,13 @@ defmodule AulasCriaWeb.SessionController do
   alias AulasCria.Core.DataBase.Model.User
   alias AulasCriaWeb.Live.Aulas.AulasLive
 
-  def index(conn, _params) do
-    render(conn, "app.html")
-  end
-
-  def new(conn, params) do
+  def index(conn, params) do
     type_user =
       params
       |> Map.get("type_user", "student")
       |> String.to_atom()
 
-    render(conn, "new.html", type_user: type_user)
+    render(conn, "app.html", type_user: type_user)
   end
 
   def new2(conn, _params) do
