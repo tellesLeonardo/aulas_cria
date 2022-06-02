@@ -1,6 +1,30 @@
-<h1>New User</h1>
+<div class="h-full flex justify-center items-center	 flex-col"> 
+    <div style="max-height: 50rem;" class="bg-white w-1/2 h-4/6 drop-shadow-xl shadow rounded-3xl px-20 py-10 flex flex-col items-center justify-between"> 
+        <div class="flex justify-around w-full"> 
+            <div> header 1 </div> 
+            <div> header 2 </div> 
+        </div>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.session_path(@conn, :create2)) %>
+        <div class="flex justify-center w-full"> body</div>
+
+        <div class="flex justify-between w-full"> 
+          
+
+            <%= link to: Routes.session_path(@conn, :index), class: "flex  text-center"  do %> 
+                <%= img_tag(Routes.static_path(@conn, "/images/arrow-left.svg"), class: "mr-2 mb-4") %> 
+                <span> Voltar </span>
+            <% end %>
 
 
-<%= link "Back", to: Routes.session_path(@conn, :index) %>
+            
+            <%= link to: Routes.session_path(@conn, :index), class: "py-2 bg-blue-500  border rounded-2xl text-white text-center flex py-2 px-4 drop-shadow-lg"  do %> 
+                <span> Continuar </span>  
+                <%= img_tag(Routes.static_path(@conn, "/images/arrow-right-1.svg"), class: "ml-2 text-xl text-white") %>
+            <% end %>
+
+        </div>
+    </div>
+</div>
+
+
+

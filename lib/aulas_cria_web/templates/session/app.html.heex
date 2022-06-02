@@ -1,4 +1,4 @@
-<div class="h-screen  ">
+
   <div class="h-full flex justify-center items-center	 flex-col"> 
     <div style="max-height: 50rem;" class="bg-white w-2/8 h-4/6 drop-shadow-xl shadow rounded-3xl py-20 px-10 flex flex-col items-center justify-between"> 
 
@@ -42,18 +42,13 @@
 
     </div>
   </div>
-</div>  
 
 
 
 
 
-<%= if signed_in?(@conn) do %>
-  <%= link "Sign out", to: Routes.session_path(@conn, :delete), method: :delete %>
-<% else %>
 
-  |
-  
-<% end %>
+
+<%= link "Sign out", to: Routes.session_path(@conn, :delete), method: :delete %>
 
 
