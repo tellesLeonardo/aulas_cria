@@ -15,11 +15,6 @@ defmodule AulasCriaWeb.SessionController do
     render(conn, "app.html", type_user: type_user)
   end
 
-  def new2(conn, _params) do
-    changeset = User.change_user(%User{})
-    render(conn, "new2.html", changeset: changeset)
-  end
-
   def create(conn, %{"session" => auth_params}) do
     case request_user(auth_params["type_user"], auth_params["username"], auth_params["password"]) do
       true ->
@@ -47,30 +42,6 @@ defmodule AulasCriaWeb.SessionController do
     case QueryInstructor.get_by_id(username) do
       nil -> false
       %{password: user_password} -> user_password == password
-    end
-  end
-
-  def create2(conn, %{"user" => user_params}) do
-    user_params = Map.put(user_params, "id", user_params["username"])
-
-    case user_params["student"] do
-      "true" ->
-        StudentUser.create(user_params)
-
-        conn
-        |> put_session(:current_user_id, user_params["id"])
-        |> put_session(:type_user, :student)
-        |> put_flash(:info, "Signed up successfully.")
-        |> redirect(to: Routes.live_path(conn, AulasLive))
-
-      "false" ->
-        InstructorUser.create(user_params)
-
-        conn
-        |> put_session(:current_user_id, user_params["id"])
-        |> put_session(:type_user, :instructor)
-        |> put_flash(:info, "Signed up successfully.")
-        |> redirect(to: Routes.live_path(conn, AulasLive))
     end
   end
 

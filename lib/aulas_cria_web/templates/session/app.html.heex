@@ -15,14 +15,14 @@
 
       <div class="w-full"> 
         <%= form_for @conn, Routes.session_path(@conn, :index), [as: :session], fn f -> %>
-          
+
             <div class="mb-5">
               <%= label(:username, "Nome de usuário", class: "text-lg")%>
-              <%= text_input f, :username, style: "border-radius: 1rem;", class: "block w-full py-2 border border-gray-500", placeholder: "Digite o nome do usuário" %>
+              <%= text_input f, :username,  class: "block w-full py-2  ", style: "border-radius: 1rem; border: 2px solid #6B7280;", placeholder: "Digite o nome do usuário" %>
             </div>
           
             <div class="mb-10">
-              <%= password_input f, :password,style: "border-radius: 1rem;", class: "block w-full py-2 border  border-gray-500",  placeholder: "Digite a senha do usuário" %>
+              <%= password_input f, :password, class: "block w-full py-2 ", style: "border-radius: 1rem; border: 2px solid #6B7280;", placeholder: "Digite a senha do usuário" %>
               <%= hidden_input f, :type_user, value: @type_user %>
             </div>
             
@@ -36,7 +36,7 @@
 
       <div>
         <p class="text-center">Não tem uma conta? 
-          <%= link "Registre-se gratuitamente", class: "text-blue-500", to: Routes.session_path(@conn, :new2) %>
+          <%= link("Registre-se gratuitamente", to: "/aulas/cadastro", class: "text-blue-500") %>
         </p>
       </div>
 
@@ -47,8 +47,4 @@
 
 
 
-
-
 <%= link "Sign out", to: Routes.session_path(@conn, :delete), method: :delete %>
-
-

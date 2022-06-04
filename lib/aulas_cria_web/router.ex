@@ -61,8 +61,6 @@ defmodule AulasCriaWeb.Router do
 
     live "/", Live.Aulas.AulasLive
     live "/task", Live.Tasks.TasksLive
-    live "/community", Live.Community.CommunityLive
+    live "/cadastro", Live.Cadastro.CadastroLive
   end
-
-
 end
