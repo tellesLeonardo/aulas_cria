@@ -1,30 +1,304 @@
+
+<%= if @step == 1 do %>
 <div class="h-screen flex justify-center items-center	 flex-col"> 
     <div style="max-height: 50rem;" class="bg-white w-1/2 h-4/6 drop-shadow-xl shadow rounded-3xl px-20 py-10 flex flex-col items-center justify-between"> 
-        <div class="flex justify-around w-full"> 
-            <div> header 1 </div> 
-            <div> header 2 </div> 
+        <div class="flex justify-between w-full"> 
+            <div class="ml-6 w-full" >
+                <p class="text-gray-400 text-lg" > Passo 1 de 3 </p>
+                <p class="mt-2 text-3xl">O que você é?</p>
+            </div>
+
+            <div class="ml-6 mt-8 w-full flex items-center"> 
+
+                <div class="w-full bg-blue-200 rounded-full h-4 dark:bg-gray-700">
+                    <div class="bg-blue-600 h-4 rounded-full dark:bg-gray-300" style="width: 25%"></div>
+                </div>
+                <span class="ml-2 text-2xl  dark:text-white">25%</span>
+            </div> 
         </div>
 
-        <div class="flex justify-center w-full"> body</div>
+        <div class="flex justify-center w-full px-20 py-10 "> 
+            <%= if @profile == "student" do %>
+                <div style="border-radius: 3rem;" class="h-80 border border-blue-600 w-full m-2 drop-shadow-xl flex flex-col justify-center items-center" phx-click="choice-profile" phx-value-choice="student"> 
+                    <%= img_tag(Routes.static_path(@socket, "/images/tick-circle.svg"), class: "ml-2 text-xl absolute w-20", style: "top: 1.5rem; right: 0.3rem;") %>
+                    <%= img_tag(Routes.static_path(@socket, "/images/book-1_blue.svg"), class: "ml-2 text-xl text-white w-48") %>
+                    Estudante
+                </div>
+            <%= else %>
+                <div style="border-radius: 3rem;" class="h-80 border border-gray-400 w-full m-2 drop-shadow-xl flex flex-col justify-center items-center" phx-click="choice-profile" phx-value-choice="student"> 
+                    <%= img_tag(Routes.static_path(@socket, "/images/book-1.svg"), class: "ml-2 text-xl text-white w-52") %>
+                    Estudante
+                </div>
+            <% end %>
+                
+
+            
+            <%= if @profile == "instructor" do %>
+                <div style="border-radius: 3rem;" class="h-80 border border-blue-600 w-full m-2 drop-shadow-xl flex flex-col justify-center items-center" phx-click="choice-profile" phx-value-choice="instructor"> 
+                    <%= img_tag(Routes.static_path(@socket, "/images/tick-circle.svg"), class: "ml-2 text-xl absolute w-20", style: "top: 1.5rem; right: 0.3rem;") %>
+                    <%= img_tag(Routes.static_path(@socket, "/images/teacher_blue.svg"), class: "ml-2 text-xl text-white w-48") %>
+                    Professor
+                </div>
+            <% else %>
+                <div style="border-radius: 3rem;" class="h-80 border border-gray-400 w-full m-2 drop-shadow-xl flex flex-col justify-center items-center" phx-click="choice-profile" phx-value-choice="instructor"> 
+                    <%= img_tag(Routes.static_path(@socket, "/images/teacher.svg"), class: "ml-2 text-xl text-white w-52") %>
+                    Professor
+                </div>
+            <% end %>
+                
+    
+
+        </div>
 
         <div class="flex justify-between w-full"> 
-          
-
             <%= link to: Routes.session_path(@socket, :index), class: "flex  text-center"  do %> 
                 <%= img_tag(Routes.static_path(@socket, "/images/arrow-left.svg"), class: "mr-2 mb-4") %> 
                 <span> Voltar </span>
             <% end %>
 
-
-            
-            <%= link to: Routes.session_path(@socket, :index), class: "py-2 bg-blue-500  border rounded-2xl text-white text-center flex py-2 px-4 drop-shadow-lg"  do %> 
+            <span ref="#" phx-click="next" class="py-2 bg-blue-500  border rounded-2xl text-white text-center flex py-2 px-4 drop-shadow-lg"> 
                 <span> Continuar </span>  
                 <%= img_tag(Routes.static_path(@socket, "/images/arrow-right-1.svg"), class: "ml-2 text-xl text-white") %>
-            <% end %>
+            </span>
 
         </div>
     </div>
 </div>
 
+<% end %>
+
+<%= if @step == 2 do %>
+<div class="h-screen flex justify-center items-center	 flex-col"> 
+    <div class="bg-white w-3/6 h-full my-2 drop-shadow-xl shadow rounded-3xl px-20 py-10 flex flex-col  justify-between "> 
+        <div class="flex justify-between w-full"> 
+            <div class="ml-6 w-full" >
+                <p class="text-gray-400 text-lg" > Passo 2 de 3 </p>
+                <p class="mt-2 text-3xl">Dados de perfil</p>
+            </div>
+
+            <div class="ml-6 mt-8 w-full flex items-center"> 
+
+                <div class="w-full bg-blue-200 rounded-full h-4 dark:bg-gray-700">
+                    <div class="bg-blue-600 h-4 rounded-full dark:bg-gray-300" style="width: 50%"></div>
+                </div>
+                <span class="ml-2 text-2xl  dark:text-white">50%</span>
+            </div> 
+        </div>
+
+        <div class="overflow-y-auto	 mt-10 h-full">
+            <%= form_for @changeset, "#", [phx_change: "validate"], fn f -> %>
+                
+                <div>
+                    <div class="container" phx-drop-target={@uploads.background.ref}>
+                            <%= if [] == @uploads.background.entries do %>
+                                <%= img_tag(Routes.static_path(@socket, "/images/galaxy.png"), class: "w-full h-80 object-cover rounded-xl	" ) %>
+                            <% else %>
+                              <%= live_img_preview hd(@uploads.background.entries), class: "w-full h-80 object-cover rounded-xl	"  %>
+                            <% end %>
+                        
+                        <label class="cursor-pointer absolute right-8 top-4">
+                            <span class="text-slate-100 flex mr-1 hover:text-slate-600" > 
+                                mostrar foto de capa
+                                <%= img_tag(Routes.static_path(@socket, "/images/brush-1.svg"), class: "mr-2 mb-4") %> 
+                            </span>
+                            <%= live_file_input @uploads.background, class: "hidden" %>
+                        </label>
+                    </div>
+
+                    <div class="container rounded-full" phx-drop-target={@uploads.avatar.ref}>
+                            <%= if [] == @uploads.avatar.entries do %>
+                                <%= img_tag(Routes.static_path(@socket, "/images/avatar.jpg"), class: "object-cover rounded-full w-40 h-40 absolute left-20", style: "top: -5rem;" ) %>
+                            <% else %>
+                              <%= live_img_preview hd(@uploads.avatar.entries), class: "object-cover rounded-full h-40 w-40 absolute left-20", style: "top: -5rem;"  %>
+                            <% end %>
+                        
+
+                        <label class="cursor-pointer absolute" style="left: 6rem; top: -3rem;">
+                            <span class="text-slate-200 hover:text-slate-600 flex flex-col items-center mr-1" > 
+                                <%= img_tag(Routes.static_path(@socket, "/images/brush-1.svg"), class: "mr-2 mb-4") %> 
+                                Editar foto
+                            </span>
+                            <%= live_file_input @uploads.avatar, class: "hidden" %>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mt-32 grid justify-items-stretch">
+                    <div class=" pb-8">
+                        <%= label(f, :name, "Nome completo*", class: "text-base	" ) %>
+                        <%= text_input(f, :name, required: true, placeholder: "Digite o nome completo",  class: "bg-gray-50 border border border-gray-800 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5") %>
+                        <%= error_tag(f, :name) %>
+                    </div>
+
+                    <div class=" pb-8">
+                        <div class="w-full xl:w-96 flex" >
+                            <label style="white-space: nowrap;margin-right: 2rem;font-size: 1.5rem;">Data de nascimento*</label>
+                            
+                            <%= select f, :day, dias(), class: "rounded-2xl mr-4 h-12 w-80 form-select  block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-400  transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", style: "min-width: 7rem;" %>
+                            
+                            <span>/</span>
+
+                            <%= select f, :month, meses(), class: "rounded-2xl mr-4 h-12 form-select block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-400  transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", style: "min-width: 10rem;" %>
+                            
+                            <span>/</span>
+
+                            <%= select f, :yeaer, anos(), class: "rounded-2xl mr-4 h-12 form-select  block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-400  transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none", style: "min-width: 7rem;" %>
+                             
+                        </div>
+                    </div>
+
+                    <div class=" pb-8 flex justify-between	">
+                        <div class="w-1/2 pr-2">                        
+                            <%= label(f, :username, "Nome de usuário*", class: "text-base whitespace-nowrap" ) %>
+                            <%= text_input(f, :username, required: true, placeholder: "Digite o nome de usuário",  class: "bg-gray-50 border border border-gray-800 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5") %>
+                            <%= error_tag(f, :username) %>
+                        </div>
+                        <div class="w-1/2 pl-2">
+                            <%= label(f, :email, "Email*", class: "text-base	whitespace-nowrap" ) %>
+                            <%= email_input(f, :email, required: true, placeholder: "Digite o email",  class: "bg-gray-50 border border border-gray-800 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5") %>
+                            <%= error_tag(f, :email) %>
+                        </div>
+                    </div>
+                    
+                    <div class=" pb-8 w-1/2">
+                        <%= label(f, :school, "Nome da sua Escola", class: "text-base	whitespace-nowrap" ) %>
+                        <%= text_input(f, :school, required: true, placeholder: "Digite o nome da sua escola",  class: "bg-gray-50 border border border-gray-800 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5") %>
+                        <%= error_tag(f, :school) %>
+                    </div>
+
+                    <div class=" pb-8 ">
+                        <%= label(f, :about_me, "Um pouco sobre você", class: "text-base	whitespace-nowrap" ) %>
+                        <%= textarea(f, :about_me, placeholder: "Descreva aqui", class: "bg-gray-50 border border border-gray-800 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5")  %>
+                        <%= error_tag(f, :about_me) %>
+                    </div>
+
+                </div>
+                
+            <% end %>
+
+        </div>
 
 
+        <div class="flex justify-between w-full"> 
+            <span phx-click="back" class="flex  text-center"> 
+                <%= img_tag(Routes.static_path(@socket, "/images/arrow-left.svg"), class: "mr-2 mb-4") %> 
+                <span> Voltar </span>
+            </span>
+
+            <%= if @changeset.valid? do %>
+                <span ref="#" phx-click="next" class="py-2 bg-blue-500  border rounded-2xl text-white text-center flex py-2 px-4 drop-shadow-lg"> 
+                    <span> Continuar </span>  
+                    <%= img_tag(Routes.static_path(@socket, "/images/arrow-right-1.svg"), class: "ml-2 text-xl text-white") %>
+                </span>
+            <% end %>
+
+        </div>
+
+    </div>
+</div>
+<% end %>
+
+
+<%= if @step == 3 do %>
+    <div class="h-screen flex justify-center items-center	 flex-col"> 
+        <div style="max-height: 50rem;" class="bg-white w-1/2 h-4/6 drop-shadow-xl shadow rounded-3xl px-20 py-10 flex flex-col items-center justify-between"> 
+            <div class="flex justify-between w-full"> 
+                <div class="ml-6 w-full" >
+                    <p class="text-gray-400 text-lg" > Passo 3 de 3 </p>
+                    <p class="mt-2 text-3xl">Criar senha</p>
+                </div>
+
+                <div class="ml-6 mt-8 w-full flex items-center"> 
+
+                    <div class="w-full bg-blue-200 rounded-full h-4 dark:bg-gray-700">
+                        <div class="bg-blue-600 h-4 rounded-full dark:bg-gray-300" style="width: 75%"></div>
+                    </div>
+                    <span class="ml-2 text-2xl  dark:text-white">75%</span>
+                </div> 
+            </div>
+
+            <div class="w-full px-20 py-10 "> 
+                <p class="font-bold">Configurar senha</p>
+                <span>Por favor, crie uma senha segura, incluindo ao menos três dos seguintes critérios abaixo.</span>
+                <ol class="ml-6 py-4 px-2 text-xl	list-disc	">
+                    <li class="mb-0.5">letras minúsculas</li>
+                    <li class="mb-0.5">números</li>
+                    <li class="mb-0.5">letras maiúsculas</li>
+                    <li class="mb-0.5">caracteres especiais</li>
+                </ol>
+
+                <div class="">
+                    <%= form_for :password, "#", [phx_change: "valide-password"], fn f -> %>
+                        
+                        <%= label(f, :password, "Senha", class: "text-base	whitespace-nowrap" ) %>
+                        <%= text_input(f, :password, placeholder: "Sua senha",  class: "bg-gray-50 border border border-gray-800 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5") %>
+                    <% end %>
+                </div>
+
+                <div class="flex">
+                    <div class="mx-2 w-full bg-gray-200 rounded-full h-2.5 ">
+                        <%= if @security > 0 do %>
+                            <div style=" background: #FC8181" class=" h-2.5 rounded-full" style="width: 100%"></div>
+                        <% end %>
+                    </div>
+
+                    <div class="mx-2 w-full bg-gray-200 rounded-full h-2.5 ">
+                        <%= if @security > 1 do %>
+                            <div style=" background: #F6AD55" class="bg-blue-600 h-2.5 rounded-full" style="width: 100%"></div>
+                        <% end %>
+                    </div>
+
+                    <div class="mx-2 w-full bg-gray-200 rounded-full h-2.5 ">
+                        <%= if @security > 2 do %>
+                            <div style=" background: #68D391" class="bg-blue-600 h-2.5 rounded-full" style="width: 100%"></div>
+                        <% end %>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex justify-between w-full"> 
+                <span phx-click="back" class="flex  text-center"> 
+                    <%= img_tag(Routes.static_path(@socket, "/images/arrow-left.svg"), class: "mr-2 mb-4") %> 
+                    <span> Voltar </span>
+                </span>
+
+                
+
+                <%= if @security > 2 do %>
+                    <span ref="#" phx-click="save" class="py-2 bg-blue-500  border rounded-2xl text-white text-center flex py-2 px-4 drop-shadow-lg"> 
+                        <span> Continuar </span>  
+                        <%= img_tag(Routes.static_path(@socket, "/images/arrow-right-1.svg"), class: "ml-2 text-xl text-white") %>
+                    </span>
+                <% end %>
+
+            </div>
+        </div>
+    </div>
+
+
+<% end %>
+
+
+<%= if @step == 4 do %>
+
+<div class="h-screen flex justify-center items-center	 flex-col"> 
+    <div style="max-height: 50rem;" class="bg-white w-1/4 h-2/4 drop-shadow-xl shadow rounded-3xl py-20 px-10 flex flex-col items-center justify-between"> 
+
+    <%= img_tag(Routes.static_path(@socket, "/images/tick-finish.svg"), class: "w-1/2 text-xl text-white") %>
+
+    <div class="flex justify-center items-center	 flex-col">
+        <p class="text-center">
+            Parabéns, seu cadastro foi realizado com sucesso
+        </p>
+
+
+        <%= link to: "/", replace: true, class: "my-4 bg-blue-500  border rounded-2xl text-white text-center flex py-2 px-4 drop-shadow-lg" do %>
+            Continuar
+        <% end %>
+    </div>
+
+    </div>
+  </div>
+
+<% end %>

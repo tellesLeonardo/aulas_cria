@@ -71,6 +71,29 @@ defmodule AulasCria.Core.SdkAws do
   end
 
   @impl true
+  def handle_call({:get_image, path}, _from, state) do
+    {:ok, link} =
+      adapter_s3().make_presigned_url(
+        Application.get_env(:ex_aws, :s3)[:bucket],
+        Path.basename(path)
+      )
+
+    {:reply, link, state}
+  end
+
+  @impl true
+  def handle_cast({:save_image, path, binary}, state) do
+    {:ok, _finish} =
+      adapter_s3().upload_file(
+        Application.get_env(:ex_aws, :s3)[:bucket],
+        Path.basename(path),
+        binary
+      )
+
+    {:noreply, state}
+  end
+
+  @impl true
   def handle_cast(_event, state) do
     IO.inspect(state)
     {:noreply, state}
@@ -86,7 +109,7 @@ defmodule AulasCria.Core.SdkAws do
 
   defp adapter_dynamo(), do: AulasCria.Core.SdkAws.DynamoItemAdpter
   defp adapter_dynamo_struct(), do: AulasCria.Core.SdkAws.DybanoTableAdpter
-  # defp adapter_s3(), do: AulasCria.Core.SdkAws.S3
+  defp adapter_s3(), do: AulasCria.Core.SdkAws.S3
 
   defp valid_table(%{"TableNames" => tables_valid}, table, function) do
     case table in tables_valid do

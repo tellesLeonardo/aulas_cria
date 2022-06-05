@@ -1,9 +1,7 @@
 defmodule AulasCriaWeb.SessionController do
   use AulasCriaWeb, :controller
 
-  alias AulasCria.Core.Service.{InstructorUser, StudentUser}
   alias AulasCria.Core.Database.Query.{QueryInstructor, QueryStudent}
-  alias AulasCria.Core.DataBase.Model.User
   alias AulasCriaWeb.Live.Aulas.AulasLive
 
   def index(conn, params) do

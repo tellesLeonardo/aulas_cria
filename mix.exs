@@ -47,14 +47,16 @@ defmodule AulasCria.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:hackney, "~> 1.18"},
+      {:hackney, "~> 1.9"},
       {:ex_aws_dynamo, "~> 4.0"},
       {:ex_aws, "~> 2.0"},
       {:ex_aws_s3, "~> 2.0"},
       {:comeonin, "~> 5.3"},
       {:bcrypt_elixir, "~> 2.0"},
+      {:poison, "~> 3.0"},
       {:ecto, "~> 3.8"},
       {:pow, "~> 1.0.24"},
+      {:sweet_xml, "~> 0.7.1"},
       {:timex, "~> 3.7"}
     ]
   end

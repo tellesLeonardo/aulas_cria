@@ -14,7 +14,7 @@
       </div> 
 
       <div class="w-full"> 
-        <%= form_for @conn, Routes.session_path(@conn, :index), [as: :session], fn f -> %>
+        <%= form_for @conn, Routes.session_path(@conn, :create), [as: :session], fn f -> %>
 
             <div class="mb-5">
               <%= label(:username, "Nome de usuário", class: "text-lg")%>

@@ -1,8 +1,8 @@
 defmodule AulasCriaWeb.Live.Aulas.AulasLive do
   use Phoenix.LiveView
 
-  alias AulasCria.PubSub
-  alias AulasCria.Core.DataBase.Model.InstructorUser
+  # alias AulasCria.PubSub
+  # alias AulasCria.Core.DataBase.Model.InstructorUser
   alias AulasCria.Core.Database.Query.{QueryInstructor, QueryStudent}
 
   def render(assigns) do
