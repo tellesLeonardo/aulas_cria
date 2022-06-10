@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="110.02505"
+   height="105.0283"
+   id="svg5867"
+   version="1.1"
+   inkscape:version="0.48.0 r9654"
+   sodipodi:docname="diagramme de venn.svg">
+  <title
+     id="title5947">diagramme de venn</title>
+  <defs
+     id="defs5869" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.24748737"
+     inkscape:cx="1272.8417"
+     inkscape:cy="55.249546"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1018"
+     inkscape:window-height="790"
+     inkscape:window-x="305"
+     inkscape:window-y="12"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5872">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>diagramme de venn</dc:title>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+        <dc:date>2011-03-05</dc:date>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>lmproulx</dc:title>
+          </cc:Agent>
+        </dc:creator>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-285.70919,-402.27455)">
+    <g
+       id="g3134"
+       transform="translate(-332.14813,-511.88004)">
+      <path
+         sodipodi:nodetypes="cccc"
+         inkscape:connector-curvature="0"
+         id="path3132-1"
+         d="m 659.4174,953.94069 c 8.22552,-3.27104 17.20065,-2.00323 26.85011,0.42149 -3.73249,8 -7.02599,16.14486 -14,20 -7.59073,-4.17498 -10.10977,-12.78194 -12.85011,-20.42149 z"
+         style="fill:#cccccc;fill-opacity:1;stroke:#cccccc;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:3.00300009" />
+      <path
+         inkscape:connector-curvature="0"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:2"
+         d="m 687.07971,948.68262 c 0.31936,18.54004 -17.19371,34.91419 -35.32962,33.49008 -17.41843,-0.21604 -33.45666,-16.18673 -32.87755,-34.07631 0.26314,-17.59566 16.08602,-33.35728 33.4992,-32.92305 16.39504,-0.58197 32.66442,12.45416 34.50582,29.26517 0.14755,1.40933 0.24401,2.82607 0.20215,4.24411 z"
+         id="path3126-4"
+         inkscape:export-filename="/Users/lmproulx/Desktop/isotype/text3279.png"
+         inkscape:export-xdpi="84.154686"
+         inkscape:export-ydpi="84.154686" />
+      <path
+         inkscape:connector-curvature="0"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:2"
+         d="m 707.20213,984.60631 c 0.31939,18.53999 -17.19369,34.91419 -35.32959,33.49009 -17.41845,-0.216 -33.45666,-16.1868 -32.87758,-34.07635 0.26315,-17.59563 16.08605,-33.35725 33.49923,-32.92302 16.39504,-0.58197 32.66439,12.45416 34.50581,29.26515 0.14756,1.40933 0.244,2.82607 0.20215,4.24413 z"
+         id="path3130-0"
+         inkscape:export-filename="/Users/lmproulx/Desktop/isotype/text3279.png"
+         inkscape:export-xdpi="84.154686"
+         inkscape:export-ydpi="84.154686" />
+      <path
+         inkscape:connector-curvature="0"
+         style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:2"
+         d="m 726.87254,949.09639 c 0.31939,18.54005 -17.19368,34.91419 -35.32961,33.49008 -17.41846,-0.21604 -33.45666,-16.18673 -32.87758,-34.07631 0.26317,-17.59566 16.08602,-33.35728 33.49923,-32.92305 16.39504,-0.58197 32.66441,12.45418 34.50584,29.26517 0.14755,1.40933 0.24396,2.82607 0.20215,4.24411 z"
+         id="path3128-6"
+         inkscape:export-filename="/Users/lmproulx/Desktop/isotype/text3279.png"
+         inkscape:export-xdpi="84.154686"
+         inkscape:export-ydpi="84.154686" />
+    </g>
+  </g>
+</svg>

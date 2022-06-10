@@ -27,4 +27,12 @@ defmodule AulasCria.Core.Database.Query.Helper do
   end
 
   def recursived(item), do: item
+
+  def check_struct(params_instructor) do
+    if is_struct(params_instructor) do
+      Map.from_struct(params_instructor)
+    else
+      params_instructor
+    end
+  end
 end

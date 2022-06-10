@@ -1,17 +1,235 @@
-<span>teste</span>
 
-<div>
-    <%= for task <- @tasks do %>
-        <div style="display: flex; flex-direction: column; border: 1px solid; width: 100px; padding: 10px 5px">
-            <span>  <%= task.description %>  </span>
-            <i> <%= task.difficulty %>  </i>
+<%= if @interests do %>
+    <.live_component module={Interests} id={@user.id} user={@user} list_interest={@list_interest} />
+<% end %>
 
-            <i> <%= task.difficulty %>  </i>
+<div class="grid grid-cols-12 gap-x-20 h-screen">
 
-            <b> <%= task.id %></b>
-            <b> <%= task.title %></b>
-            
+    <div class="col-span-1 h-full bg-gray-200 flex flex-col justify-between items-center py-10">
+        <div  class="flex flex-col h-2/3 justify-around">
+            <%= img_tag(Routes.static_path(@socket, "/images/Logo.svg"), class: "", style: "width: 7rem; height: 3rem;") %>
+    
+            <button class="border-0 hover:bg-indigo-200 focus:bg-gray-200 outline-none focus:border-l-4 focus:border-indigo-600"  style="width: 7rem; height: 3rem;">
+                <%= img_tag(Routes.static_path(@socket, "/images/element-equal.svg"), class: "w-full h-full") %>
+            </button>
+
+            <button phx-click="my-interests" class="border-0 hover:bg-indigo-200 focus:bg-gray-200 outline-none focus:border-l-4 focus:border-indigo-600"  style="width: 7rem; height: 3rem;">
+                <%= img_tag(Routes.static_path(@socket, "/images/book.svg"), class: "w-full h-full") %>
+            </button>
+
+            <button class="border-0 hover:bg-indigo-200 focus:bg-gray-200 outline-none focus:border-l-4 focus:border-indigo-600"  style="width: 7rem; height: 3rem;">
+                <%= img_tag(Routes.static_path(@socket, "/images/award.svg"), class: "w-full h-full", style: "opacity: 0.2;") %>
+            </button>
+
+            <button class="border-0 hover:bg-indigo-200 focus:bg-gray-200 outline-none focus:border-l-4 focus:border-indigo-600"  style="width: 7rem; height: 3rem;">
+                <%= img_tag(Routes.static_path(@socket, "/images/messages-2.svg"), class: "w-full h-full", style: "opacity: 0.2;") %>
+            </button>
         </div>
-        
-    <% end %> 
+
+        <div class="flex flex-col h-40 justify-between">
+            <button class="border-0 hover:bg-indigo-200 focus:bg-gray-200 outline-none focus:border-l-4 focus:border-indigo-600"  style="width: 7rem; height: 3rem;">
+                    <%= img_tag(Routes.static_path(@socket, "/images/setting.svg"), class: "", style: "width: 7rem; height: 3rem; opacity: 0.2;") %>
+            </button>
+
+            <%= link to: Routes.session_path(@socket, :delete)  do %>
+                <%= img_tag(Routes.static_path(@socket, "/images/logout.svg"), class: "hover:bg-indigo-200", style: "width: 7rem; height: 3rem;") %>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="col-span-6 h-full ">
+        <div class="grid grid-rows-6 h-full gap-y-5 pt-10">
+            <div  class="row-span-1 rounded-2xl w-full h-full bg-gray-200 flex justify-between px-10 py-5">
+                <div>
+                    <h2 class="font-bold text-5xl mt-4"> Olá <%= @user.id %>!</h2>
+                    <p>Muito bom te ver aqui</p>
+                </div>
+
+                <%= img_tag(Routes.static_path(@socket, "/images/Illustration.svg"), class: "", style: "height: 13rem; position: absolute; top: 0; right: 65rem;") %>
+
+            </div>
+
+            <div class="row-span-2">
+                <div class="flex justify-between">
+                    <p class="font-bold">Base de conhecimento</p>
+                </div>
+
+                <div class="overflow-x-auto	">
+                    <%= for cat <- @categories do %>
+                        <div style="border-radius: 3rem; background: #74ace71f;" class="h-60 w-60  m-2 drop-shadow-xl py-5 px-5">
+                            <%= img_tag(Routes.static_path(@socket, cat["image"]), class: "h-12 w-12 mb-4") %>
+
+                            <span><%= cat["category"] %></span>
+
+
+
+                            <%= if cat["video"] do %>
+                                 <ol class="list-disc ml-6">
+                                    <li class="text-gray-600"> 1 videos</li>
+                                 </ol>
+
+                                <div class="flex justify-between items-center">
+                                    <div class="w-2/3 bg-gray-200 rounded-full  h-1.5 dark:bg-gray-700">
+                                        <div class="bg-gray-600 h-1.5 rounded-full dark:bg-gray-300" style="width: 100%"></div>
+
+                                    </div>
+                                    <span class=""> 1/1</span>
+                                </div>
+
+                            <% else %>
+                                 <ol class="list-disc ml-6">
+                                    <li class="text-gray-600"> 1 videos</li>
+                                 </ol>
+
+                            
+                                <div class="flex justify-between items-center">
+                                    <div class="w-2/3 bg-gray-200 rounded-full  h-1.5 dark:bg-gray-700">
+                                        <div class="bg-gray-600 h-1.5 rounded-full dark:bg-gray-300" style="width: 1%"></div>
+
+                                    </div>
+                                    <span class=""> 0/1</span>
+                                </div>
+
+                                
+                            <% end %>
+                        </div>
+
+                    <% end %>
+                </div>
+
+            </div>
+
+
+
+            <div class="overflow-y-auto row-span-3">
+                <p class="font-bold py-10">Tarefas relevantes</p>
+
+                <%= for task <- @tasks do %>
+
+                    <div class="flex border-b-2 my-4 justify-between">
+
+                        <div class="flex ">
+                            <%= img_tag(Routes.static_path(@socket, "/images/Evaluation.svg"), class: "mr-8") %>
+                            
+                            <span class="px-10">
+                                <p><%= task.title %></p>
+                                <small><%= task.category %></small>
+                            </span>
+
+                            <span class="flex self-center">
+                                <%= img_tag(Routes.static_path(@socket, "/images/flame 1.svg"), class: "h-8") %>
+                                <%= task.difficulty %>
+                            </span>
+                        </div>
+
+                        <%= link to: "/" , class: "border-2 border-gray-800 self-center rounded-2xl py-2.5 px-5" do %>
+                             <span class="font-bold">Ver atividade</span>
+                        <% end %>
+
+                    </div>
+                <% end %>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-span-5 h-full py-10 pr-5">
+        <div class="flex  items-center">
+            <%= form_for :search, "#", [class: "w-full px-10 flex", phx_change: "search-task"], fn f -> %>
+                <%= text_input(f, :search_task, required: true, placeholder: "Pesquisar",  style: "border-radius: 1rem; border: 1px solid; color: black;", class: "bg-gray-50 text-gray-900 text-lg rounded-full") %>
+                <%= img_tag(Routes.static_path(@socket, "/images/search-normal.svg"), class: "hover:bg-indigo-200", style: "border-radius: 100%; margin-left: -3rem;") %>
+            <% end %>
+
+            <%= if @search_tasks != [] do %>
+                <div class="fixed bg-white drop-shadow-md rounded-3xl px-2.5 py-5" style="width: 42rem; z-index: 999; top: 6.75rem; margin-left: 2rem; height: 30rem;">
+                    <%= for search_task <- @search_tasks do %>
+                    
+                        <div class="flex border-b-2 my-4 justify-between">
+                            <div class="flex ">
+                                <%= img_tag(Routes.static_path(@socket, "/images/Evaluation.svg"), class: "mr-8") %>
+                                
+                                <span class="px-10">
+                                    <p><%= search_task.title %></p>
+                                    <small><%= search_task.category %></small>
+                                </span>
+
+                                <span class="flex self-center">
+                                    <%= img_tag(Routes.static_path(@socket, "/images/flame 1.svg"), class: "h-8") %>
+                                    <%= search_task.difficulty %>
+                                </span>
+                            </div>
+
+                            <%= img_tag(Routes.static_path(@socket, "/images/pngaaa 1.svg"), class: "h-20") %>
+
+                        </div>
+
+                    <% end %>   
+
+                </div>
+            <% end %>
+
+            <%= img_tag(get_image(@user.picture, @socket), class: "hover:bg-indigo-200 h-20 w-20 mb-8", style: "border-radius: 100%") %>
+
+        </div>
+
+        <div class="h-3/4 grid grid-rows-3 grid-cols-2 gap-6">
+            <div class="back rounded-3xl drop-shadow-md">
+                <div class="flex h-full items-center px-8">
+                    <p class="text-8xl font-bold px-2"><%= count_att(@user.tasks) %></p> 
+                    
+                    <p class="px-4">
+                        <span> Atividades </span>
+                        <span>Completadas </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="back rounded-3xl drop-shadow-md">
+                <div class="flex h-full items-center justify-center">
+                    <p class="text-8xl font-bold px-2"><%= count_pts(@user.tasks) %></p>
+                    pts
+                </div>    
+
+            </div>
+
+            <div class="col-span-2 back rounded-3xl drop-shadow-md overflow-hidden flex  px-10 py-5">
+                <div>
+                    <span class="text-4xl font-bold" >Loja de recompensas</span>
+                    <p class="py-4">Converta seus pontos em recompensas :D</p>
+
+                    <%= link to: "/" , class: "border-2 border-gray-800 flex self-center rounded-2xl w-80 py-2.5 px-5" do %>
+                        <span class="font-bold">
+                            Acessar a loja                 
+                        </span>
+
+                        <%= img_tag(Routes.static_path(@socket, "/images/arrow-right-2.svg"), class: "ml-2") %>
+                    <% end %>
+                </div>
+
+                <div>
+                    <%= img_tag(Routes.static_path(@socket, "/images/pngaaa 1.svg"), class: "h-32 ", style: "opacity: 0.3; position: absolute; margin-left: 10rem; margin-top: 1rem;") %>
+                    <%= img_tag(Routes.static_path(@socket, "/images/pngaaa 1.svg"), class: "h-44", style: "position: absolute; margin-left: 13rem;") %>
+                </div>
+            </div>
+            <div class="col-span-2 back rounded-3xl drop-shadow-md px-5 py-5" style="margin-bottom: -2rem;">
+                <span class="text-4xl font-bold" >Crie grupos de estudos</span>                
+                <p class="py-4">Tenha grupos de estudos para poder facilitar a sua rotina de aprendizagem com outros usuários!</p>
+
+
+                 <%= link to: "/" , class: "border-2 border-gray-800 flex self-center rounded-2xl w-80 py-2.5 px-5" do %>
+                    <span class="font-bold">
+                        Criar agora                 
+                    </span>
+
+                    <%= img_tag(Routes.static_path(@socket, "/images/arrow-right-2.svg"), class: "ml-2") %>
+                <% end %>
+
+            </div>
+
+        </div>
+    </div>
+
+
 </div>
+

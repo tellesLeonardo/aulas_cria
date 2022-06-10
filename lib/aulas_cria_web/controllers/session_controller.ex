@@ -19,13 +19,12 @@ defmodule AulasCriaWeb.SessionController do
         conn
         |> put_session(:current_user_id, auth_params["username"])
         |> put_session(:type_user, String.to_atom(auth_params["type_user"]))
-        |> put_flash(:info, "Signed in successfully.")
         |> redirect(to: Routes.live_path(conn, AulasLive))
 
       false ->
         conn
         |> put_flash(:error, "There was a problem with your username/password")
-        |> render("new.html", type_user: String.to_atom(auth_params["type_user"]))
+        |> render("app.html", type_user: String.to_atom(auth_params["type_user"]))
     end
   end
 
@@ -46,7 +45,6 @@ defmodule AulasCriaWeb.SessionController do
   def delete(conn, _params) do
     conn
     |> delete_session(:current_user_id)
-    |> put_flash(:info, "Signed out successfully.")
     |> redirect(to: Routes.registration_path(conn, :index))
   end
 end

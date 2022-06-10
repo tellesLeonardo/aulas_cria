@@ -3,9 +3,8 @@
     <div style="max-height: 50rem;" class="bg-white w-2/8 h-4/6 drop-shadow-xl shadow rounded-3xl py-20 px-10 flex flex-col items-center justify-between"> 
 
       <div class="text-center flex flex-col justify-between h-32">
-        <div>
-          <span class="font-bold text-4xl">Tote</span>
-          <%= link "#{inverse_type(@type_user)}", class: find_badge(@type_user), to: Routes.session_path(@conn, :index, type_user: inverse_type(@type_user) ) %>
+        <div class="flex justify-center	">
+          <%= img_tag(Routes.static_path(@conn, "/images/Group 980.svg")) %>
         </div>
 
         <div>
@@ -37,6 +36,10 @@
       <div>
         <p class="text-center">Não tem uma conta? 
           <%= link("Registre-se gratuitamente", to: "/aulas/cadastro", class: "text-blue-500") %>
+        </p>
+
+        <p class="mt-2 text-center">
+          <%= link "Logar como #{inverse_type(@type_user)}", class: "text-blue-500", to: Routes.session_path(@conn, :index, type_user: inverse_type(@type_user) ) %>
         </p>
       </div>
 

@@ -17,7 +17,6 @@ defmodule AulasCriaWeb.AuthHandler do
 
       auth in [false, nil] ->
         conn
-        |> put_flash(:error, "You've to be authenticated first")
         |> redirect(to: Routes.session_path(conn, :index))
     end
   end

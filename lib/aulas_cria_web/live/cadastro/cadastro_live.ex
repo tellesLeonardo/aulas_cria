@@ -91,8 +91,8 @@ defmodule AulasCriaWeb.Live.Cadastro.CadastroLive do
       })
 
     case socket.assigns.profile do
-      "student" -> StudentUser.create(socket.assigns.user_params)
-      "instructor" -> InstructorUser.create(socket.assigns.user_params)
+      "student" -> StudentUser.create(user_params)
+      "instructor" -> InstructorUser.create(user_params)
     end
 
     {:noreply, assign(socket, step: 4, user_params: user_params)}
@@ -108,6 +108,7 @@ defmodule AulasCriaWeb.Live.Cadastro.CadastroLive do
       SdkAws.call({:get_image, name_img})
     end)
     |> List.first()
+    |> IO.inspect(label: "vulcani")
   end
 
   defp create_date(user) do

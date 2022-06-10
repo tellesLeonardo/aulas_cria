@@ -23,7 +23,9 @@ defmodule AulasCria.Core.Database.Query.QueryStudent do
   end
 
   def update(instructor_id, update_instructor_user) do
-    SdkAws.call({:update, @table_name, instructor_id, update_instructor_user})
+    SdkAws.call(
+      {:update, @table_name, instructor_id, Helper.check_struct(update_instructor_user)}
+    )
   end
 
   def delete(instructor_id) do
@@ -31,12 +33,7 @@ defmodule AulasCria.Core.Database.Query.QueryStudent do
   end
 
   def create(params_user) do
-    params_user =
-      if is_struct(params_user),
-        do: Map.from_struct(params_user),
-        else: params_user
-
-    SdkAws.call({:create, @table_name, params_user})
+    SdkAws.call({:create, @table_name, Helper.check_struct(params_user)})
   end
 
   defp formater_instructor_user(%{"Count" => 0}), do: nil
@@ -55,8 +52,9 @@ defmodule AulasCria.Core.Database.Query.QueryStudent do
         id: item["id"],
         name: item["name"],
         password: item["password"],
-        picture: item["foto"],
+        picture: item["foto"] || item["picture"],
         school: item["school"],
+        interests: formater_interests(item["interests"]),
         tasks: item["tasks"],
         colege: item["colege"],
         high_school: item["high_school"],
@@ -69,4 +67,17 @@ defmodule AulasCria.Core.Database.Query.QueryStudent do
     do: formater_instructor_user(%{"Items" => items}) |> List.first()
 
   defp formater_instructor_user(_), do: nil
+
+  defp formater_interests(nil), do: []
+
+  defp formater_interests(interests) do
+    Enum.map(interests, fn item ->
+      %{
+        discription: item["discription"],
+        id: item["id"],
+        image: item["image"],
+        title: item["title"]
+      }
+    end)
+  end
 end

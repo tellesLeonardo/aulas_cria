@@ -65,6 +65,8 @@ defmodule AulasCriaWeb do
     quote do
       use Phoenix.Component
 
+      alias AulasCriaWeb.Router.Helpers, as: Routes
+
       unquote(view_helpers())
     end
   end

@@ -14,6 +14,7 @@ defmodule AulasCria.Core.DataBase.Model.StudentUser do
             background: nil,
             colege: false,
             high_school: false,
+            interests: [],
             instructors: [],
             tasks: []
 end
