@@ -57,7 +57,8 @@ defmodule AulasCria.MixProject do
       {:ecto, "~> 3.8"},
       {:pow, "~> 1.0.24"},
       {:sweet_xml, "~> 0.7.1"},
-      {:timex, "~> 3.7"}
+      {:timex, "~> 3.7"},
+      {:emqtt, github: "emqx/emqtt", tag: "1.4.4", system_env: [{"BUILD_WITHOUT_QUIC", "1"}]}
     ]
   end
 

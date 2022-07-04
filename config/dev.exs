@@ -20,6 +20,10 @@ config :aulas_cria, AulasCriaWeb.Endpoint,
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
   ]
 
+config :node_red, :emqtt,
+  host: '18.212.28.184',
+  port: 1883
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed
