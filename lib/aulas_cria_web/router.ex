@@ -37,30 +37,36 @@ defmodule AulasCriaWeb.Router do
 
   import Phoenix.LiveDashboard.Router
 
-  scope "/login", AulasCriaWeb do
+  scope "/", AulasCriaWeb do
     pipe_through([:browser])
 
-    get "/", SessionController, :index
-    # get "/", SessionController, :new
-    post "/sign-in", SessionController, :create
-    get "/sign-up", SessionController, :new2
-    post "/sign-up", SessionController, :create2
-    get "/sign-out", SessionController, :delete
+    live "/", Live.Node.Red
   end
 
-  scope "/", AulasCriaWeb do
-    pipe_through([:browser, :authenticated])
+  # scope "/login", AulasCriaWeb do
+  #   pipe_through([:browser])
 
-    resources "/", RegistrationController, only: [:index]
+  #   get "/", SessionController, :index
+  #   # get "/", SessionController, :new
+  #   post "/sign-in", SessionController, :create
+  #   get "/sign-up", SessionController, :new2
+  #   post "/sign-up", SessionController, :create2
+  #   get "/sign-out", SessionController, :delete
+  # end
 
-    live_dashboard "/dashboard", metrics: Telemetry
-  end
+  # scope "/", AulasCriaWeb do
+  #   pipe_through([:browser, :authenticated])
 
-  scope "/aulas", AulasCriaWeb do
-    pipe_through([:browser, :live_view])
+  #   resources "/", RegistrationController, only: [:index]
 
-    live "/", Live.Aulas.AulasLive
-    live "/task", Live.Tasks.TasksLive
-    live "/cadastro", Live.Cadastro.CadastroLive
-  end
+  #   live_dashboard "/dashboard", metrics: Telemetry
+  # end
+
+  # scope "/aulas", AulasCriaWeb do
+  #   pipe_through([:browser, :live_view])
+
+  #   live "/", Live.Aulas.AulasLive
+  #   live "/task", Live.Tasks.TasksLive
+  #   live "/cadastro", Live.Cadastro.CadastroLive
+  # end
 end

@@ -1,0 +1,46 @@
+<div class="h-screen flex justify-center items-center	 flex-col"> 
+    <div style="max-height: 50rem;" class="bg-white w-3/4 h-4/6 drop-shadow-xl shadow rounded-3xl px-20 py-10 flex flex-col items-center justify-between"> 
+        <div class="flex justify-between w-full"> 
+            <div class="ml-6 w-full" >
+                <p class="mt-2 text-3xl">Simulador dos sensores </p>
+            </div>
+
+
+            <div class="ml-6 mt-8 w-full flex items-center"> 
+                <%= img_tag(Routes.static_path(@socket, "/images/house.svg"), class: "w-64" , style: "margin-top: -25px") %>            
+                
+                <%= if @status do %>
+                    <div class="w-8 h-8 bg-green-400 rounded-full drop-shadow-xl" style="margin-top: -10rem"></div>                
+                <% else %>
+                    <div class="w-8 h-8 bg-red-400 rounded-full drop-shadow-xl" style="margin-top: -10rem" ></div>
+                <% end %>
+            </div> 
+
+        </div>
+
+ 
+        <%= form_for :sensor, "#", [phx_change: "validate", class: "flex justify-center w-full px-20 py-10 "], fn f ->  %>
+            <div style="border-radius: 3rem; text-align: center;" class="h-80 border border-blue-600 w-full m-2 drop-shadow-xl flex flex-col justify-center items-center"  > 
+                Gás Cloro (CL2)
+                <%= range_input(f, :cl2, id: "cl2", name: "cl2", class: "outline-none", phx_hook: "TransferringCL2" , min: "0", max: "30", value: @cl2, data_no2: @no2, data_r22: @r22, data_co2: @co2) %>
+            </div>
+            
+            <div style="border-radius: 3rem; text-align: center;" class="h-80 border border-blue-600 w-full m-2 drop-shadow-xl flex flex-col justify-center items-center"  > 
+                Dióxido de Nitrogênio (NO2)
+                <%= range_input(f, :no2, id: "no2", name: "no2", class: "outline-none", phx_hook: "TransferringNO2" , min: "0", max: "50", value: @no2, data_cl2: @cl2, data_r22: @r22, data_co2: @co2) %>
+            </div>
+            
+            <div style="border-radius: 3rem; text-align: center;" class="h-80 border border-blue-600 w-full m-2 drop-shadow-xl flex flex-col justify-center items-center"  > 
+                Clorodifluorometano (R-22) 
+                <%= range_input(f, :r22, id: "r22", name: "r22", class: "outline-none", phx_hook: "TransferringR22" , min: "0", max: "100", value: @r22, data_cl2: @cl2, data_no2: @no2, data_co2: @co2) %>
+            </div>
+
+            <div style="border-radius: 3rem; text-align: center;" class="h-80 border border-blue-600 w-full m-2 drop-shadow-xl flex flex-col justify-center items-center"  > 
+                Monóxido de Carbono (CO2) 
+                <%= range_input(f, :co2, id: "co2", name: "co2", class: "outline-none", phx_hook: "TransferringCO2" , min: "0", max: "100", value: @co2, data_cl2: @cl2, data_no2: @no2, data_r22: @r22) %>
+            </div>
+        <% end %>
+
+
+    </div>
+</div>
